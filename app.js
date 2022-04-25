@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const port = 3000;
-const adminRoutes = require("./routes/admin");
+const adminData = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 
 const bodyParser = require("body-parser");
@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // orders is matter of the order of the routes
 //http://localhost:3000/admin/add-product
-app.use("/admin", adminRoutes);
+app.use("/admin", adminData.routes);
 app.use(shopRoutes);
 
 app.use((req, res, next) => {
