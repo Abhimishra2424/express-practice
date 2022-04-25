@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const path = require("path");
 const port = 3000;
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
@@ -15,7 +16,9 @@ app.use(shopRoutes);
 
 // 404 error
 app.use((req, res, next) => {
-  res.status(404).send("<h1>Page not found</h1>");
+  res
+    .status(404)
+    .sendFile(path.join(__dirname,  "views", "page-notFound.html"));
 });
 
 app.listen(port, () => {
