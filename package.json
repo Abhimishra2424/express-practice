@@ -12,6 +12,9 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.0",
-    "express": "^4.17.3"
+    "ejs": "^3.1.7",
+    "express": "^4.17.3",
+    "express-handlebars": "^6.0.5",
+    "pug": "^3.0.2"
   }
 }
