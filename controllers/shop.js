@@ -14,13 +14,14 @@ exports.getProduct = (req, res, next) => {
   const prodId = req.params.productId;
   console.log(prodId);
   res.redirect("/");
-  // Product.findById(prodId, (product) => {
-  //   res.render("shop/product-detail", {
-  //     product: product,
-  //     pageTitle: product.title,
-  //     path: "/products",
-  //   });
-  // });
+  Product.findById(prodId, (product) => {
+    // res.render("shop/product-detail", {
+    //   product: product,
+    //   pageTitle: product.title,
+    //   path: "/products",
+    // });
+    console.log(product);
+  });
 };
 
 exports.getInedx = (req, res, next) => {
