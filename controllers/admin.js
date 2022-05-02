@@ -8,42 +8,37 @@ exports.getAddProduct = (req, res, next) => {
   });
 };
 
-exports.postAddProduct = (req, res, next) => {
+exports.postAddProduct = async (req, res, next) => {
   const title = req.body.title;
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
 
-  Product.create({
+  await Product.create({
     title: title,
     price: price,
     imageUrl: imageUrl,
     description: description,
-  })
-    .then((r) => {
-      console.log(r);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  });
 };
 
-exports.getEditProduct = (req, res, next) => {
+exports.getEditProduct = async (req, res, next) => {
   const editMode = req.query.edit;
   if (!editMode) {
     return res.redirect("/");
   }
   const prodId = req.params.productId;
-  Product.findById(prodId, (product) => {
-    if (!product) {
-      return res.redirect("/");
-    }
-    res.render("admin/edit-product", {
-      pageTitle: "Edit Product",
-      path: "/admin/edit-product",
-      editing: editMode,
-      product: product,
-    });
+  const p = await Product.findAll({
+    where: {
+      id: prodId,
+    },
+  });
+  console.log(p[0]);
+  res.render("admin/edit-product", {
+    pageTitle: "Edit Product",
+    path: "/admin/edit-product",
+    editing: editMode,
+    product: p[0],
   });
 };
 
