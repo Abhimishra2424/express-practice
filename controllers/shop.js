@@ -22,8 +22,8 @@ exports.getProduct = (req, res) => {
   })
     .then((products) => {
       res.render("shop/product-detail", {
-        product: products,
-        pageTitle: products.title,
+        product: products[0],
+        pageTitle: products[0].title,
         path: "/products",
       });
     })
