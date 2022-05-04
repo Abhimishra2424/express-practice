@@ -3,6 +3,8 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const sequelize = require("./util/database");
+const Product = require("./models/product");
+const User = require("./models/user");
 
 const app = express();
 
@@ -22,8 +24,14 @@ app.use((req, res, next) => {
   res.status(404).render("404", { pageTitle: "Page Not Found" });
 });
 
+Product.belongsTo(User, {
+  constraints: true,
+  onDelete: "CASCADE",
+});
+User.hasMany(Product);
+
 sequelize
-  .sync()
+  .sync({ force: true })
   .then((result) => {
     // console.log(result);
     app.listen(3000);
