@@ -3,6 +3,7 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const sequelize = require("./util/database");
+const errorController = require("./controllers/error");
 const Product = require("./models/product");
 const User = require("./models/user");
 const Cart = require("./models/cart");
@@ -32,6 +33,9 @@ app.use((req, res, next) => {
 
 app.use("/admin", adminRoutes);
 app.use(shopRoutes);
+
+
+app.use(errorController.get404);
 
 app.use((req, res, next) => {
   res.status(404).render("404", { pageTitle: "Page Not Found" });
